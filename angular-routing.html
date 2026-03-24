@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angular - Routage & Services</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { font-family: Arial, sans-serif; background: #f4f6f9; color: #333; padding: 20px; line-height: 1.6; }
+.main-nav { display: flex; justify-content: space-between; align-items: center; background: #222; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+.main-nav ul { display: flex; gap: 15px; list-style: none; }
+.main-nav a { color: #ccc; text-decoration: none; }
+.main-nav a:hover { color: #fff; }
+section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 10px; }
+pre { background: #1e1e1e; color: #cfcfcf; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 14px; margin-top: 10px; }
+.exercise { margin-top: 15px; padding: 15px; border-left: 4px solid #007BFF; background: #fafafa; border-radius: 6px; }
+.exercise button { margin-top: 10px; padding: 6px 12px; background: #007BFF; color: white; border: none; cursor: pointer; }
+.solution { display: none; margin-top: 10px; }
+</style>
+</head>
+<body>
+<nav class="main-nav">
+<h2 class="logo">eLearning</h2>
+<ul>
+<li><a href="index.html">Accueil</a></li>
+<li><a href="angular-install.html">Angular Install</a></li>
+<li><a href="angular-components.html">Composants</a></li>
+<li><a href="angular-routing.html">Routage</a></li>
+<li><a href="angular-mini-projet.html">Mini-Projet</a></li>
+</ul>
+</nav>
+
+<h1>Angular - Routage & Services</h1>
+
+<!-- ================= COURS ================= -->
+<section>
+<h2>10 Cours Théoriques Approfondis</h2>
+<p><strong>1.</strong> RouterModule et AppRoutingModule pour centraliser toutes les routes de l'application.</p>
+<p><strong>2.</strong> Définir routes simples et paramétrées : <code>{ path: 'user/:id', component: UserComponent }</code>.</p>
+<p><strong>3.</strong> Utiliser <code>routerLink</code> pour naviguer depuis les templates HTML.</p>
+<p><strong>4.</strong> <code>&lt;router-outlet&gt;</code> comme point d’injection dynamique des composants selon la route.</p>
+<p><strong>5.</strong> Récupérer paramètres de route : <code>this.route.snapshot.paramMap.get('id')</code>.</p>
+<p><strong>6.</strong> Navigation programmatique avec <code>this.router.navigate(['/home'])</code>.</p>
+<p><strong>7.</strong> Services Angular : centraliser logique métier et accès aux API.</p>
+<p><strong>8.</strong> HttpClientModule pour effectuer des appels REST vers backend.</p>
+<p><strong>9.</strong> Observables et <code>subscribe()</code> pour recevoir les données asynchrones.</p>
+<p><strong>10.</strong> Manipulation des données avec <code>map()</code> ou <code>pipe()</code> pour transformation avant affichage.</p>
+</section>
+
+<!-- ================= EXEMPLES ================= -->
+<section>
+<h2>Exemples Commentés</h2>
+<pre><code>
+/* 1. AppRoutingModule avec routes simples et paramétrées */
+const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'users', component: UsersComponent },
+  { path: 'user/:id', component: UserComponent },
+  { path: '**', component: PageNotFoundComponent }
+];
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}
+
+/* 2. Template avec routerLink */
+&lt;a routerLink="/users"&gt;Liste des utilisateurs&lt;/a&gt;
+
+/* 3. RouterOutlet pour injection dynamique */
+&lt;router-outlet&gt;&lt;/router-outlet&gt;
+
+/* 4. Service Angular pour API utilisateurs */
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({ providedIn: 'root' })
+export class UserService {
+  private apiUrl = 'http://localhost:5000/users';
+  constructor(private http: HttpClient) {}
+  getUsers(): Observable&lt;any&gt; { return this.http.get(this.apiUrl); }
+  getUser(id: number): Observable&lt;any&gt; { return this.http.get(`${this.apiUrl}/${id}`); }
+}
+
+/* 5. Appel service et affichage */
+this.userService.getUsers().subscribe(users =&gt; {
+  this.users = users.map(u =&gt; ({ ...u, fullName: u.name.toUpperCase() }));
+});
+
+/* 6. Navigation programmatique */
+goToUser(userId: number) {
+  this.router.navigate(['/user', userId]);
+}
+</code></pre>
+</section>
+
+<!-- ================= EXERCICES ================= -->
+<section>
+<h2>Exercices Pratiques</h2>
+
+<div class="exercise">
+1. Définir une route UsersComponent
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>{ path: 'users', component: UsersComponent }</code></pre>
+</div>
+
+<div class="exercise">
+2. Ajouter RouterOutlet dans AppComponent
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code></pre>
+</div>
+
+<div class="exercise">
+3. Créer service HttpClient
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>
+@Injectable({ providedIn: 'root' })
+export class UserService {
+  constructor(private http: HttpClient) {}
+}
+</code></pre>
+</div>
+
+<div class="exercise">
+4. Récupérer liste utilisateurs avec subscribe
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>
+this.userService.getUsers().subscribe(users =&gt; this.users = users);
+</code></pre>
+</div>
+
+<div class="exercise">
+5. Naviguer vers un utilisateur spécifique
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>
+this.router.navigate(['/user', userId]);
+</code></pre>
+</div>
+
+</section>
+
+<script>
+function toggle(btn){
+  const el = btn.nextElementSibling;
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>

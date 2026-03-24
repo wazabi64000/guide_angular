@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angular - Composants & Binding</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { font-family: Arial, sans-serif; background: #f4f6f9; color: #333; padding: 20px; line-height: 1.6; }
+.main-nav { display: flex; justify-content: space-between; align-items: center; background: #222; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+.main-nav ul { display: flex; gap: 15px; list-style: none; }
+.main-nav a { color: #ccc; text-decoration: none; }
+.main-nav a:hover { color: #fff; }
+section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 10px; }
+pre { background: #1e1e1e; color: #cfcfcf; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 14px; margin-top: 10px; }
+.exercise { margin-top: 15px; padding: 15px; border-left: 4px solid #007BFF; background: #fafafa; border-radius: 6px; }
+.exercise button { margin-top: 10px; padding: 6px 12px; background: #007BFF; color: white; border: none; cursor: pointer; }
+.solution { display: none; margin-top: 10px; }
+</style>
+</head>
+<body>
+<nav class="main-nav">
+<h2 class="logo">eLearning</h2>
+<ul>
+<li><a href="index.html">Accueil</a></li>
+<li><a href="angular-install.html">Angular Install</a></li>
+<li><a href="angular-components.html">Composants</a></li>
+<li><a href="angular-routing.html">Routage</a></li>
+<li><a href="angular-mini-projet.html">Mini-Projet</a></li>
+</ul>
+</nav>
+
+<h1>Angular - Composants & Binding</h1>
+
+<!-- ================= COURS ================= -->
+<section>
+<h2>10 Cours Théoriques Approfondis</h2>
+<p><strong>1.</strong> Créer un composant : <code>ng generate component NomComposant</code>. Chaque composant est autonome avec template, style et logique.</p>
+<p><strong>2.</strong> Templates HTML et CSS : séparation claire pour lisibilité et réutilisation.</p>
+<p><strong>3.</strong> Interpolation : <code>{{ variable }}</code> pour afficher dynamiquement des données.</p>
+<p><strong>4.</strong> Property Binding : <code>[attr]="valeur"</code> pour lier des propriétés HTML aux variables TypeScript.</p>
+<p><strong>5.</strong> Event Binding : <code>(click)="fonction()"</code> pour gérer événements utilisateur.</p>
+<p><strong>6.</strong> Two-way Binding : <code>[(ngModel)]="variable"</code> pour synchroniser input et variable automatiquement.</p>
+<p><strong>7.</strong> Input & Output : @Input() pour passer des données à un composant enfant, @Output() + EventEmitter pour envoyer vers le parent.</p>
+<p><strong>8.</strong> Communication parent-enfant et enfant-parent pour architecture modulaire.</p>
+<p><strong>9.</strong> Réutilisation : composants configurables via @Input() pour éviter duplication de code.</p>
+<p><strong>10.</strong> Bonnes pratiques : composants petits et concentrés sur une seule responsabilité.</p>
+</section>
+
+<!-- ================= EXEMPLES ================= -->
+<section>
+<h2>Exemples Commentés</h2>
+<pre><code>
+/* 1. Créer composant UserCard */
+ng generate component UserCard
+
+/* 2. Interpolation */
+&lt;h3&gt;{{ user.name }}&lt;/h3&gt;
+
+/* 3. Property Binding */
+&lt;img [src]="user.avatar" alt="{{user.name}}" /&gt;
+
+/* 4. Event Binding */
+&lt;button (click)="deleteUser(user.id)"&gt;Supprimer&lt;/button>
+
+/* 5. Two-way Binding */
+&lt;input [(ngModel)]="user.name" placeholder="Modifier nom" /&gt;
+
+/* 6. Input pour recevoir data */
+@Input() user;
+
+/* 7. Output pour notifier parent */
+@Output() deleted = new EventEmitter<number>();
+delete() {
+  this.deleted.emit(this.user.id);
+}
+
+/* 8. Utilisation composant enfant dans parent */
+&lt;app-user-card *ngFor="let u of users" [user]="u" (deleted)="removeUser($event)"&gt;&lt;/app-user-card&gt;
+</code></pre>
+</section>
+
+<!-- ================= EXERCICES ================= -->
+<section>
+<h2>Exercices Pratiques</h2>
+
+<div class="exercise">
+1. Créer composant UserCard
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>ng generate component UserCard</code></pre>
+</div>
+
+<div class="exercise">
+2. Interpolation nom utilisateur
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>&lt;h3&gt;{{ user.name }}&lt;/h3&gt;</code></pre>
+</div>
+
+<div class="exercise">
+3. Property Binding image avatar
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>&lt;img [src]="user.avatar" alt="{{user.name}}" /&gt;</code></pre>
+</div>
+
+<div class="exercise">
+4. Event Binding bouton
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>&lt;button (click)="deleteUser(user.id)"&gt;Supprimer&lt;/button&gt;</code></pre>
+</div>
+
+<div class="exercise">
+5. Two-way Binding input
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>&lt;input [(ngModel)]="user.name" /&gt;</code></pre>
+</div>
+
+<div class="exercise">
+6. Input & Output
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>@Input() user;
+@Output() deleted = new EventEmitter&lt;number&gt;();</code></pre>
+</div>
+
+<div class="exercise">
+7. Utilisation composant dans parent
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>&lt;app-user-card *ngFor="let u of users" [user]="u" (deleted)="removeUser($event)"&gt;&lt;/app-user-card&gt;</code></pre>
+</div>
+
+</section>
+
+<script>
+function toggle(btn){
+  const el = btn.nextElementSibling;
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>

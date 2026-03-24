@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini-Projet Angular - Guide Complet</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { font-family: Arial, sans-serif; background: #f4f6f9; color: #333; padding: 20px; line-height: 1.6; }
+.main-nav { display: flex; justify-content: space-between; align-items: center; background: #222; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+.main-nav ul { display: flex; gap: 15px; list-style: none; }
+.main-nav a { color: #ccc; text-decoration: none; }
+.main-nav a:hover { color: #fff; }
+section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 10px; }
+pre { background: #1e1e1e; color: #cfcfcf; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 14px; margin-top: 10px; }
+.exercise { margin-top: 15px; padding: 15px; border-left: 4px solid #007BFF; background: #fafafa; border-radius: 6px; }
+.exercise button { margin-top: 10px; padding: 6px 12px; background: #007BFF; color: white; border: none; cursor: pointer; }
+.solution { display: none; margin-top: 10px; }
+h2 { color:#007BFF; }
+</style>
+</head>
+<body>
+
+<nav class="main-nav">
+<h2 class="logo">eLearning Angular</h2>
+<ul>
+<li><a href="index.html">Accueil</a></li>
+<li><a href="angular-install.html">Installation</a></li>
+<li><a href="angular-components.html">Composants</a></li>
+<li><a href="angular-routing.html">Routage</a></li>
+<li><a href="angular-mini-projet.html">Mini-Projet</a></li>
+</ul>
+</nav>
+
+<h1>Mini-Projet Angular : Guide Complet Pas-à-Pas</h1>
+
+<!-- ================= ETAPE 1 ================= -->
+<section>
+<h2>Étape 1 : Installer Angular et créer le projet</h2>
+<p><strong>Objectif :</strong> Avoir un projet Angular fonctionnel prêt à coder.</p>
+<ul>
+<li>Installer Node.js et npm</li>
+<li>Installer Angular CLI : <code>npm install -g @angular/cli</code></li>
+<li>Créer projet Angular : <code>ng new mini-projet</code>, activer <code>routing</code> et SCSS</li>
+<li>Lancer le serveur : <code>ng serve</code></li>
+</ul>
+<div class="exercise">
+<button onclick="toggle(this)">Exercice : Créer le projet</button>
+<pre class="solution"><code>ng new mini-projet --routing --style=scss
+cd mini-projet
+ng serve</code></pre>
+</div>
+</section>
+
+<!-- ================= ETAPE 2 ================= -->
+<section>
+<h2>Étape 2 : Créer des composants</h2>
+<p><strong>Objectif :</strong> Organiser ton application en modules et composants réutilisables.</p>
+<ul>
+<li>Composant formulaire : <code>ng generate component UserForm</code></li>
+<li>Composant liste utilisateurs : <code>ng generate component UserList</code></li>
+<li>Composant carte utilisateur : <code>ng generate component UserCard</code></li>
+</ul>
+<div class="exercise">
+<button onclick="toggle(this)">Exercice : Créer les composants</button>
+<pre class="solution"><code>ng generate component UserForm
+ng generate component UserList
+ng generate component UserCard</code></pre>
+</div>
+</section>
+
+<!-- ================= ETAPE 3 ================= -->
+<section>
+<h2>Étape 3 : Configurer le routage</h2>
+<p><strong>Objectif :</strong> Naviguer entre les pages via URL.</p>
+<ul>
+<li>Définir routes dans <code>app-routing.module.ts</code> :</li>
+<pre><code>const routes: Routes = [
+  { path: 'form', component: UserFormComponent },
+  { path: 'list', component: UserListComponent },
+  { path: '', redirectTo: '/form', pathMatch: 'full' }
+];</code></pre>
+<li>Ajouter <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> dans <code>app.component.html</code></li>
+</ul>
+<div class="exercise">
+<button onclick="toggle(this)">Exercice : Ajouter une route</button>
+<pre class="solution"><code>imports: [RouterModule.forRoot(routes)]</code></pre>
+</div>
+</section>
+
+<!-- ================= ETAPE 4 ================= -->
+<section>
+<h2>Étape 4 : Créer le formulaire utilisateur</h2>
+<p><strong>Objectif :</strong> Récupérer dynamiquement les informations saisies.</p>
+<ul>
+<li>Importer <code>FormsModule</code> dans AppModule</li>
+<li>Lier les champs avec <code>[(ngModel)]</code></li>
+<pre><code>&lt;form (ngSubmit)="onSubmit()"&gt;
+  &lt;input [(ngModel)]="name" name="name" placeholder="Nom" required /&gt;
+  &lt;input [(ngModel)]="email" name="email" placeholder="Email" required /&gt;
+  &lt;button type="submit"&gt;Ajouter&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+</ul>
+<div class="exercise">
+<button onclick="toggle(this)">Exercice : Créer formulaire</button>
+<pre class="solution"><code>name = '';
+email = '';
+onSubmit() {
+  console.log('Nom:', this.name, 'Email:', this.email);
+}</code></pre>
+</div>
+</section>
+
+<!-- ================= ETAPE 5 ================= -->
+<section>
+<h2>Étape 5 : Créer le service API</h2>
+<p><strong>Objectif :</strong> Centraliser l’accès aux données utilisateurs.</p>
+<ul>
+<li>Créer <code>UserService</code> et utiliser fetch() ou HttpClient</li>
+<pre><code>@Injectable({providedIn:'root'})
+export class UserService {
+  apiUrl = 'http://localhost:5000/users';
+  getUsers(){ return fetch(this.apiUrl).then(res =&gt; res.json()); }
+  addUser(user){ return fetch(this.apiUrl,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(user)
+  }).then(res =&gt; res.json()); }
+}</code></pre>
+</ul>
+<div class="exercise">
+<button onclick="toggle(this)">Exercice : Créer le service</button>
+<pre class="solution"><code>// UserFormComponent
+this.userService.addUser({name:this.name,email:this.email})
+  .then(u =&gt; console.log('Utilisateur ajouté', u));</code></pre>
+</div>
+</section>
+
+<!-- ================= ETAPE 6 ================= -->
+<section>
+<h2>Étape 6 : Afficher la liste des utilisateurs</h2>
+<p><strong>Objectif :</strong> Récupérer et afficher les utilisateurs dynamiquement.</p>
+<ul>
+<li>Récupérer données dans <code>ngOnInit</code> :</li>
+<pre><code>users = [];
+loading = false;
+error = '';
+
+ngOnInit() {
+  this.loading = true;
+  this.userService.getUsers()
+    .then(data =&gt; this.users = data)
+    .catch(err =&gt; this.error = 'Impossible de charger les utilisateurs')
+    .finally(() =&gt; this.loading = false);
+}</code></pre>
+<li>Afficher avec <code>*ngFor</code> :</li>
+<pre><code>&lt;div *ngFor="let user of users"&gt;
+  &lt;h3&gt;{{user.name | titlecase}}&lt;/h3&gt;
+  &lt;p&gt;{{user.email | lowercase}}&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</ul>
+<div class="exercise">
+<button onclick="toggle(this)">Exercice : Afficher utilisateurs</button>
+<pre class="solution"><code>// Vérifier que la liste se met à jour après ajout d'utilisateur</code></pre>
+</div>
+</section>
+
+<!-- ================= ETAPE 7 ================= -->
+<section>
+<h2>Étape 7 : Formulaire + affichage dynamique complet</h2>
+<p><strong>Objectif :</strong> Combiner toutes les étapes pour un mini-projet fonctionnel.</p>
+<pre><code>&lt;form (ngSubmit)="onSubmit()"&gt;
+  &lt;input [(ngModel)]="name" name="name" required /&gt;
+  &lt;input [(ngModel)]="email" name="email" required /&gt;
+  &lt;button type="submit"&gt;Ajouter&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;div *ngIf="loading"&gt;Chargement...&lt;/div&gt;
+&lt;div *ngIf="error"&gt;{{error}}&lt;/div&gt;
+
+&lt;div *ngFor="let user of users"&gt;
+  &lt;h3&gt;{{user.name | titlecase}}&lt;/h3&gt;
+  &lt;p&gt;{{user.email | lowercase}}&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</section>
+
+<script>
+function toggle(btn){
+  const el = btn.nextElementSibling;
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angular - Installation & Configuration</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { font-family: Arial, sans-serif; background: #f4f6f9; color: #333; padding: 20px; line-height: 1.6; }
+.main-nav { display: flex; justify-content: space-between; align-items: center; background: #222; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+.main-nav ul { display: flex; gap: 15px; list-style: none; }
+.main-nav a { color: #ccc; text-decoration: none; }
+.main-nav a:hover { color: #fff; }
+section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 10px; }
+pre { background: #1e1e1e; color: #cfcfcf; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 14px; margin-top: 10px; }
+.exercise { margin-top: 15px; padding: 15px; border-left: 4px solid #007BFF; background: #fafafa; border-radius: 6px; }
+.exercise button { margin-top: 10px; padding: 6px 12px; background: #007BFF; color: white; border: none; cursor: pointer; }
+.solution { display: none; margin-top: 10px; }
+</style>
+</head>
+<body>
+<nav class="main-nav">
+<h2 class="logo">eLearning</h2>
+<ul>
+<li><a href="index.html">Accueil</a></li>
+<li><a href="angular-install.html">Angular Install</a></li>
+<li><a href="angular-components.html">Composants</a></li>
+<li><a href="angular-routing.html">Routage</a></li>
+<li><a href="angular-mini-projet.html">Mini-Projet</a></li>
+</ul>
+</nav>
+
+<h1>Angular - Installation & Configuration</h1>
+
+<!-- ================= COURS ================= -->
+<section>
+<h2>10 Cours Théoriques Approfondis</h2>
+<p><strong>1.</strong> Installer Node.js et npm : Angular nécessite Node.js >= 14 et npm pour gérer les packages.</p>
+<p><strong>2.</strong> Installer Angular CLI : <code>npm install -g @angular/cli</code>. CLI fournit les commandes pour générer projets, composants, services, modules.</p>
+<p><strong>3.</strong> Créer un projet Angular : <code>ng new mon-projet</code>. Explication des options : routing (oui/non), style (CSS/SCSS), package manager.</p>
+<p><strong>4.</strong> Démarrer le serveur de développement : <code>ng serve</code>. Serveur live reload pour visualiser les changements instantanément.</p>
+<p><strong>5.</strong> Structure du projet : comprendre <code>src/app</code> (composants), <code>assets</code> (images, fichiers statiques), <code>index.html</code>, <code>angular.json</code>.</p>
+<p><strong>6.</strong> Modules Angular : NgModule organise composants, services, pipes, directives. AppModule est le module racine.</p>
+<p><strong>7.</strong> Environnements : <code>environments/environment.ts</code> pour dev/prod, utile pour API endpoints et configurations.</p>
+<p><strong>8.</strong> TypeScript : Angular utilise TypeScript strict pour typage, interfaces et classes.</p>
+<p><strong>9.</strong> Installer packages supplémentaires : RxJS pour gestion Observables, Angular Material pour UI, ou d’autres libs selon besoin.</p>
+<p><strong>10.</strong> Compilation production : <code>ng build --prod</code> minifie et optimise l’application pour déploiement.</p>
+</section>
+
+<!-- ================= EXEMPLES ================= -->
+<section>
+<h2>Exemples Commentés</h2>
+
+<pre><code>
+/* 1. Créer projet Angular */
+ng new mon-projet
+/* Options : routing: yes/no, CSS ou SCSS */
+
+/* 2. Démarrer serveur dev */
+cd mon-projet
+ng serve
+/* Live reload sur http://localhost:4200 */
+
+/* 3. AppModule de base */
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
+/* 4. Ajouter un package via npm */
+npm install @angular/material
+</code></pre>
+</section>
+
+<!-- ================= EXERCICES ================= -->
+<section>
+<h2>Exercices Pratiques</h2>
+
+<div class="exercise">
+1. Installer Angular CLI
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>npm install -g @angular/cli</code></pre>
+</div>
+
+<div class="exercise">
+2. Créer un nouveau projet
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>ng new mon-projet</code></pre>
+</div>
+
+<div class="exercise">
+3. Démarrer serveur développement
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>cd mon-projet
+ng serve</code></pre>
+</div>
+
+<div class="exercise">
+4. Ajouter un package (ex: Angular Material)
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>npm install @angular/material</code></pre>
+</div>
+
+<div class="exercise">
+5. Comprendre structure AppModule
+<button onclick="toggle(this)">Solution</button>
+<pre class="solution"><code>
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+</code></pre>
+</div>
+
+</section>
+
+<script>
+function toggle(btn){
+  const el = btn.nextElementSibling;
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>

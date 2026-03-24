@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eLearning Angular - Accueil</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { font-family: Arial, sans-serif; background: #f4f6f9; color: #333; padding: 20px; line-height: 1.6; }
+.main-nav { display: flex; justify-content: space-between; align-items: center; background: #222; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+.main-nav ul { display: flex; gap: 15px; list-style: none; }
+.main-nav a { color: #ccc; text-decoration: none; }
+.main-nav a:hover { color: #fff; }
+section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 10px; }
+h1 { margin-bottom: 15px; }
+ul li { margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<nav class="main-nav">
+  <h2 class="logo">eLearning</h2>
+  <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="angular-install.html">Angular Install</a></li>
+    <li><a href="angular-components.html">Composants</a></li>
+    <li><a href="angular-routing.html">Routage</a></li>
+    <li><a href="angular-mini-projet.html">Mini-Projet</a></li>
+  </ul>
+</nav>
+
+<h1>Bienvenue sur la formation Angular</h1>
+
+<section>
+<p>Cette formation approfondie sur Angular est conçue pour fournir une compréhension complète et professionnelle du framework. Chaque étape inclut des concepts théoriques, des exemples concrets et des exercices pratiques :</p>
+
+<ul>
+  <li><strong>Installation et configuration :</strong> Découvrez comment installer Angular via <code>npm</code>, créer un projet avec <code>ng new</code>, comprendre la structure de base (src, app, assets, environments).</li>
+
+  <li><strong>Composants :</strong> Apprenez à générer des composants avec <code>ng generate component</code>, comprendre leur architecture (template HTML, CSS, TypeScript), et organiser votre application en modules et composants réutilisables.</li>
+
+  <li><strong>Binding et événements :</strong> Comprendre le <em>data binding</em> avec <code>{{ }}</code> pour l'affichage de données, <code>[(ngModel)]</code> pour la liaison bidirectionnelle, et <code>(click)</code> ou d’autres événements pour interagir avec l’utilisateur.</li>
+
+  <li><strong>Routage :</strong> Configuration du <code>RouterModule</code>, création de routes pour naviguer entre différentes pages, et utilisation de <code>&lt;router-outlet&gt;</code> pour afficher dynamiquement les composants correspondants aux routes.</li>
+
+  <li><strong>Services et API :</strong> Création de services avec <code>ng generate service</code> pour centraliser la logique métier, communication avec une API via <code>HttpClient</code> ou <code>fetch</code>, gestion des Promises et Observables, ainsi que traitement des erreurs et des états de chargement.</li>
+
+  <li><strong>Formulaires :</strong> Création de formulaires réactifs ou template-driven, validation des champs (required, email, pattern), et soumission de données vers un backend.</li>
+
+  <li><strong>Affichage dynamique :</strong> Utilisation de <code>*ngFor</code> pour itérer sur des tableaux, filtrer, trier et afficher des listes d’objets de manière efficace et optimisée.</li>
+
+  <li><strong>Optimisation :</strong> Comprendre le cycle de vie des composants, <code>ngOnInit</code>, <code>ngOnDestroy</code>, et comment réduire les re-render inutiles pour améliorer la performance des applications complexes.</li>
+</ul>
+
+<p>À la fin de cette formation, vous serez capable de créer des applications Angular complètes, modulaires, et maintenables, capables de communiquer avec des API et de gérer des formulaires dynamiques avec affichage en temps réel.</p>
+</section>
+
+</body>
+</html>
